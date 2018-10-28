@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('/timers')->group(function(){
+    Route::get('/',function(){
+    return response()->json(['massage' => 'HelloWorld']);
+    });
+});
+
+Route::get('timer/{id}','RoomController@getTest');
+
+Route::get('rooms','RoomController@room');
+Route::get('room/{id}','RoomController@roomById');
