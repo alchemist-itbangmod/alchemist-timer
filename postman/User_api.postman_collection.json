@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "92593618-f5ea-4f03-aef5-11ae77364dbd",
+		"name": "timer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36d6f55c-4b82-41b5-b62b-ae36e927a8a4",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"ส่ง response ไป /users ได้ status 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"ได้รับข้อมูล user ทั้งหมด 5 คน\", function(){",
+							"    var users = pm.response.json();",
+							"    ",
+							"    pm.getUsers(users.lenght).to.eql(5);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "a4b7fc36-55e8-4d00-8b2d-db92746827cd",
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/http://localhost:8000/api/users",
+							"protocol": "{{url}}/http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "ส่ง response ไป user ได้ status 200"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6beeda42-bef3-43fe-b39b-5e61bbab7862",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "03e41eb2-414c-41a1-aa67-93e849c56704",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
