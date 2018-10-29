@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\RoomRepository;
+use App\Repositories\RoomRepositoryInterface;
 
 class RoomController extends Controller
 {
     protected $roomRepository;
 
     public function __construct(RoomRepositoryInterface $roomRepo){
-        $this->roomRepo = $roomRepo;
+        $this->roomRepository = $roomRepo;
     }
 
     public function getTest($id){
