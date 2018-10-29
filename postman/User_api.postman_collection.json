@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "92593618-f5ea-4f03-aef5-11ae77364dbd",
+		"name": "timer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be86fe91-2808-40d2-bed6-304eb804baef",
+						"exec": [
+							"pm.test(\"ส่ง request ไป /users ได้ status 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"ได้รับข้อมูล user ทั้งหมด 5 คน\", function(){",
+							"    var users = pm.response.json();",
+							"    ",
+							"    pm.expect(users.length).to.eql(5);",
+							"});",
+							"",
+							"pm.test(\"ได้รับ name ของ user คนที่ 1 ถูกต้อง\", function(){",
+							"    var users = pm.response.json();",
+							"    var user1 = users[0];",
+							"    ",
+							"    pm.expect(user1.id).to.eql(1);",
+							"    pm.expect(user1.provider_name).to.eql(\"Steve Job\");",
+							"    pm.expect(user1.nickname).to.eql(\"ab\");",
+							"    pm.expect(user1.provider_id).to.eql(\"123456789101112\");",
+							"    ",
+							"    ",
+							"}) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/http://localhost:8000/api/users",
+							"protocol": "{{url}}/http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "ส่ง response ไป user ได้ status 200"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8000/api/users/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f175d680-96c5-477f-8aba-9a3d6335f413",
+						"exec": [
+							"pm.test(\"ส่ง response ไป /users ได้ status 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"\", function(){",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6beeda42-bef3-43fe-b39b-5e61bbab7862",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "03e41eb2-414c-41a1-aa67-93e849c56704",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
