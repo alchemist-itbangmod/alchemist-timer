@@ -9,8 +9,8 @@ class RoomController extends Controller
 {
     protected $roomRepository;
 
-    public function __construct(){
-        $this->roomRepository = new RoomRepository;
+    public function __construct(RoomRepositoryInterface $roomRepo){
+        $this->roomRepo = $roomRepo;
     }
 
     public function getTest($id){
