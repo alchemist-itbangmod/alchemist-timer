@@ -11,19 +11,31 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "36d6f55c-4b82-41b5-b62b-ae36e927a8a4",
-						"type": "text/javascript",
+						"id": "be86fe91-2808-40d2-bed6-304eb804baef",
 						"exec": [
-							"pm.test(\"ส่ง response ไป /users ได้ status 200\", function(){",
+							"pm.test(\"ส่ง request ไป /users ได้ status 200\", function(){",
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
 							"pm.test(\"ได้รับข้อมูล user ทั้งหมด 5 คน\", function(){",
 							"    var users = pm.response.json();",
 							"    ",
-							"    pm.getUsers(users.lenght).to.eql(5);",
-							"});"
-						]
+							"    pm.expect(users.length).to.eql(5);",
+							"});",
+							"",
+							"pm.test(\"ได้รับ name ของ user คนที่ 1 ถูกต้อง\", function(){",
+							"    var users = pm.response.json();",
+							"    var user1 = users[0];",
+							"    ",
+							"    pm.expect(user1.id).to.eql(1);",
+							"    pm.expect(user1.provider_name).to.eql(\"Steve Job\");",
+							"    pm.expect(user1.nickname).to.eql(\"ab\");",
+							"    pm.expect(user1.provider_id).to.eql(\"123456789101112\");",
+							"    ",
+							"    ",
+							"}) "
+						],
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -49,7 +61,6 @@
 			},
 			"response": [
 				{
-					"id": "a4b7fc36-55e8-4d00-8b2d-db92746827cd",
 					"name": "Default",
 					"originalRequest": {
 						"method": "GET",
@@ -78,6 +89,46 @@
 					"body": "ส่ง response ไป user ได้ status 200"
 				}
 			]
+		},
+		{
+			"name": "http://localhost:8000/api/users/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f175d680-96c5-477f-8aba-9a3d6335f413",
+						"exec": [
+							"pm.test(\"ส่ง response ไป /users ได้ status 200\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"\", function(){",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8000/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
