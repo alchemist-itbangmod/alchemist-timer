@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "fe616930-3f93-41c3-a213-ac96c4fc08d6",
+		"name": "Timer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET rooms",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "29719255-463f-4bd3-8fee-e2408a516b8d",
+						"exec": [
+							"pm.test(\"ส่ง Request ไป /rooms ได้ Status 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"ข้อมูล Rooms ต้องมี 5 ห้อง\", function () {",
+							"    var rooms = pm.response.json();",
+							"    ",
+							"    pm.expect(rooms.length).to.eql(5);",
+							"});",
+							"pm.test(\"ข้อมูล Room ห้องที่ 1 มีข้อมูลถูกต้อง\", function () {",
+							"    // arrange",
+							"    var room_arrange = {",
+							"        room_name: 'CB2301'",
+							"    }",
+							"    ",
+							"    // act",
+							"    var jsonData = pm.response.json();",
+							"    console.log(jsonData)",
+							"    var room = jsonData[0];",
+							"    ",
+							"    // assert",
+							"    pm.expect(room.room_name).to.eql(room_arrange.room_name);",
+							"});",
+							"pm.test(\"ข้อมูล Room ห้องที่ 2 มีข้อมูลถูกต้อง\", function () {",
+							"    // arrange",
+							"    var room_arrange = {",
+							"        room_name: 'CB2302'",
+							"    }",
+							"    ",
+							"    // act",
+							"    var jsonData = pm.response.json();",
+							"    var room = jsonData[1];",
+							"    ",
+							"    // assert",
+							"    pm.expect(room.room_name).to.eql(room_arrange.room_name);",
+							"});",
+							"pm.test(\"ข้อมูล Room ห้องที่ 3 มีข้อมูลถูกต้อง\", function () {",
+							"    // arrange",
+							"    var room_arrange = {",
+							"        room_name: 'CB2303'",
+							"    }",
+							"    ",
+							"    // act",
+							"    var jsonData = pm.response.json();",
+							"    var room = jsonData[2];",
+							"    ",
+							"    // assert",
+							"    pm.expect(room.room_name).to.eql(room_arrange.room_name);",
+							"});",
+							"pm.test(\"ข้อมูล Room ห้องที่ 4 มีข้อมูลถูกต้อง\", function () {",
+							"    // arrange",
+							"    var room_arrange = {",
+							"        room_name: 'CB2304'",
+							"    }",
+							"    ",
+							"    // act",
+							"    var jsonData = pm.response.json();",
+							"    var room = jsonData[3];",
+							"    ",
+							"    // assert",
+							"    pm.expect(room.room_name).to.eql(room_arrange.room_name);",
+							"});",
+							"pm.test(\"ข้อมูล Room ห้องที่ 5 มีข้อมูลถูกต้อง\", function () {",
+							"    // arrange",
+							"    var room_arrange = {",
+							"        room_name: 'CB2305'",
+							"    }",
+							"    ",
+							"    // act",
+							"    var jsonData = pm.response.json();",
+							"    var room = jsonData[4];",
+							"    console.log(room.room_name)",
+							"    ",
+							"    // assert",
+							"    pm.expect(room.room_name).to.eql(room_arrange.room_name);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8c4ad582-f735-463b-9c84-cd9d02410288",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"massage\":\"Hi\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/rooms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"rooms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET room/:id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb22a067-c6da-45d1-84e9-c418a80fb566",
+						"exec": [
+							"pm.test(\"ส่ง Request ไป /rooms/:id ได้ Status 200\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"ทดสอบ id 1 \", function() {",
+							"    var room_arrange = {",
+							"        id : 1",
+							"    }",
+							"    ",
+							" var jsonData = pm.response.json();",
+							"    ",
+							"    pm.expect(jsonData.id).to.eql(room_arrange.id);",
+							"});",
+							"",
+							"pm.test(\"ทดสอบ id 5\", function() {",
+							"    var room_arrange = {",
+							"        id : 5",
+							"    }",
+							"    ",
+							" var jsonData = pm.response.json();",
+							"    ",
+							"    pm.expect(jsonData.id).to.eql(room_arrange.id);",
+							"});",
+							"",
+							"// pm.test(\"ทดสอบ id 1 \", function() {",
+							"//     var data = JSON.parse(responseBody);",
+							"//     console.log(data)",
+							"//     var room_arrange = {",
+							"//         id : 1",
+							"//     }",
+							"// //   tests[\"reponse กลับ ของ id \"+ data.id] = data.id == room_arrange.id",
+							"",
+							"//  var jsonData = pm.response.json();",
+							"//     var room = jsonData[1];",
+							"    ",
+							"//     pm.expect(data.id).to.eql(room_arrange.id);",
+							"// });",
+							"",
+							"// pm.test(\"ทดสอบ id 5\", function() {",
+							"//     var data = JSON.parse(responseBody);",
+							"//     var room_arrange = {",
+							"//         id : 5",
+							"//     }",
+							"// //   tests[\"reponse กลับ ของ id \"+ data.id] = data.id == room_arrange.id",
+							"// });",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6d3037d8-de09-4db6-87a2-a19b0febb076",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/room/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"room",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
