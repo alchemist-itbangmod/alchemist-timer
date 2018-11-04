@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('rooms','RoomController@room');
-Route::get('room/{id}','RoomController@roomById');
+Route::get('room/{id}','RoomController@getRoomById');
 Route::get('users', 'UserController@getUsers');
-Route::get('users/{id}', 'UserController@getUserId');
+Route::get('users/{id}', 'UserController@getUserById');

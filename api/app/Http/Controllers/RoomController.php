@@ -18,12 +18,12 @@ class RoomController extends Controller
         return response()->json(['time'=>'testTime']);
     }
 
-    public function room(){
+    public function getRooms(){
         $rooms = $this->roomRepository->getRooms();
         return response()->json($rooms);
     }
 
-    public function roomById($id){
+    public function getRoomById($id){
         $roomById = $this->roomRepository->getRoomById($id);
         return response()->json($roomById);
     }
