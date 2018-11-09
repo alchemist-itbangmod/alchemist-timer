@@ -6,6 +6,7 @@ import ParallaxWrapper from 'react-parallax-button/ParallaxWrapper';
 import SweetAlert from 'sweetalert2-react';
 
 
+
 const Input = styled.input`
 	width: 50vw;
 	height:10vh;
@@ -14,24 +15,24 @@ const Input = styled.input`
 const Img = styled.img`
 	width: 60vw;
 `
+const Btn = styled.button`
+
+`
 
 class FormInput extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
+	state = {
 			show: false,
 		};
-	}
-	createSuccess = () => {
-		swal({
-			type: 'success',
-			title: 'Your work has been saved',
-			showConfirmButton: false,
-			timer: 1500
-		})
 
-	}
-
+		createSuccess = () => {
+			swal({
+				type: 'success',
+				title: 'Your work has been saved',
+				showConfirmButton: true,
+				onConfirm : this.setState({ show: false }),
+				confirmButtonClass: 'btn btn-success',
+			})
+		}	
 
 	render() {
 		return (
@@ -43,15 +44,8 @@ class FormInput extends Component {
 					<div className="form-group">
 						<Input type="text" name="roomCode" className="form-control" id="exampleInputEmail1" placeholder="Enter room name" />
 					</div>
-					<button title='Create Room' onclick={() => this.createSuccess} bgColor='#313638'>Test</button>
+				<Btn className="btn-primary" type='submit' onClick={(e) => this.createSuccess(e)}>Alert</Btn>
 				</form>
-				<Button title="" onClick={() => this.setState({ show: true })}>Alert</Button>
-				<SweetAlert
-					show={this.state.show}
-					title="Complete !!"
-					type="success"
-					text={{}} 
-				/>
 			</div>
 		);
 	}
