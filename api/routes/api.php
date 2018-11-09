@@ -20,4 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('rooms','RoomController@room');
 Route::get('room/{id}','RoomController@getRoomById');
 Route::get('users', 'UserController@getUsers');
-Route::get('users/{id}', 'UserController@getUserById');
+Route::get('user/{id}', 'UserController@getUsersById');
+Route::get('user/test/{nickname}', 'UserController@getUserByNickname');
+Route::get('user', 'UserController@createUser');
+
