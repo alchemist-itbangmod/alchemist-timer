@@ -6,7 +6,12 @@
     "bootstrap": "^4.1.3",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-scripts": "2.0.5"
+    "react-parallax-button": "^1.0.4",
+    "react-router-dom": "^4.3.1",
+    "react-router-link": "^2.0.2",
+    "react-scripts": "2.0.5",
+    "styled-components": "^4.0.3",
+    "sweetalert2-react": "^0.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
