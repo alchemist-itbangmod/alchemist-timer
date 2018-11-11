@@ -6,9 +6,14 @@ use App\Model\User;
 class UserRepository implements UserRepositoryInterface {
 
     public function getUsers() {
-        return Room::all();
+        return User::all();
     }
-    public function getUsersById($id) {
-        return Room::find($id);
+    public function getUserById($id) {
+        return User::find($id);
+    }
+    
+    public function getUserByNickname() {
+        $nickname = DB::table('users')->select('nickname')->where('room_code',$room_code)->get();
+        return $nickname;
     }
 }
