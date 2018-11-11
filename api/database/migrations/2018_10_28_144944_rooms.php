@@ -19,6 +19,8 @@ class Rooms extends Migration
             $table->string('room_code', 100);
             $table->timestamp('time_current');
             $table->integer('user_id');
+
+            $table->timestamps();
         });
     }
 
