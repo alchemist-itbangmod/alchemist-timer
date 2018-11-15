@@ -22,7 +22,7 @@ const FormInput = () => (
 			<div className="form-group">
 				<Input type="text" name="roomCode" className="form-control" id="exampleInputEmail1" placeholder="Enter room code" />
 			</div>
-			<a href="/timerpage">
+			<a href="/timepage">
 				<Button title='Join Room' type='submit' bgColor='#EE6352'></Button>
 			</a>
 			<a href="/createroom"><Button title='Create Room' bgColor='#313638' /></a>

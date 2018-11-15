@@ -7,7 +7,6 @@ const Bg = styled.div`
 	height:100vh;
 	background-color:#F7A64A;
 `
-
 const HomePage = () => (
 	<div className="container-fulid">
 		<Bg className='align-items-center d-flex justify-content-center'>
