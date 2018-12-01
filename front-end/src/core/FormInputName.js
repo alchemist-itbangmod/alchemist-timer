@@ -4,8 +4,9 @@ import swal from 'sweetalert2';
 import ParallaxWrapper from 'react-parallax-button/ParallaxWrapper';
 import axios from 'axios';
 
+
 const Input = styled.input`
-	width: 50vw;
+	width: 40vw;
 	height:10vh;
 `
 
@@ -13,26 +14,20 @@ const Img = styled.img`
 	width: 60vw;
 `
 const Btn = styled.button`
-	margin : 1%;
+	margin : 0%;
+	border-radius : 5%;	
+	height: 10vh;
 `
 
 class FormInput extends Component {
 	state = {
 		show: false,
 		persons: [],
-		newRoomName: '',
-		text : '',
+		getRoomBycode: '',
+		text: '',
+		getCode : '',
 	};
 
-	createSuccess = () => {
-		swal({
-			type: 'success',
-			title: 'Your work has been saved',
-			showConfirmButton: true,
-			onConfirm: this.setState({ show: false }),
-			confirmButtonClass: 'btn btn-success',
-		})
-	}
 
 	componentDidMount() {
 		axios.get(`http://localhost:8000/api/rooms`)
@@ -47,41 +42,52 @@ class FormInput extends Component {
 			method: 'post',
 			url: 'http://localhost:8000/api/room',
 			data: {
-				room_name: 'TetsRoom',
-				user_id: 1,
+				room_name: this.state.text,
 			},
 		}).then(res => {
 			const data = res.data.room_name;
-			this.setState({ newRoomName: data })
+			this.setState({ getRoomBycode: data })
+			const roomcode = res.data.room_code;
+			this.setState({getCode : roomcode})
 		})
 	}
 
 	handleChange(e) {
-    this.setState({ text: e.target.value });
-  }
+		this.setState({ text: e.target.value });
+	}
 
 	render() {
+		if (this.state.getRoomBycode != '') {
+			swal({
+				title : "Your room name is" + " " +this.state.getRoomBycode,
+				html :"<b>Your code is</b>" + " "+ this.state.getCode,
+			})
+		}
 		return (
 			<div className="container">
 				<div className="row">
 					<div className="col-12 d-flex justify-content-center">
 						<ParallaxWrapper parallaxScale={0.5}><Img src="/img/CreateRoom.png" /></ParallaxWrapper>
 					</div>
-					<div className="col-12 d-flex justify-content-center">
-						<div className="form-group">
-							<Input 
-							value={this.state.text} 
-							onChange={(e) => this.handleChange(e)} 
-							className="form-control" 
-							placeholder="Enter room name" />
+					<div className="col-12">
+						<div className="row">
+							<div className="col-8 d-flex justify-content-end">
+								<div className="form-group">
+									<Input
+										value={this.state.text}
+										onChange={(e) => this.handleChange(e)}
+										className="form-control"
+										placeholder="Enter room name" />
+								</div>
+							</div>
+							<div className="col-4 justify-content-start">
+								<Btn className="btn btn-primary" type='button' onClick={() => this.getRoomName()}>CreateRoom</Btn>
+							</div>
 						</div>
-					<Btn className="btn-primary" type='button' onClick={() => this.getRoomName()}>Alert</Btn>
 					</div>
-					<ul>
-						Test : {this.state.persons.map(persons => <li>{persons.room_name}</li>)}
-					</ul>
-					{this.state.newRoomName}
 				</div>
+				<ul>
+				</ul>
 			</div>
 		);
 	}
