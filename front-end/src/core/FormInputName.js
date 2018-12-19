@@ -32,8 +32,8 @@ class FormInput extends Component {
 	componentDidMount() {
 		axios.get(`http://localhost:8000/api/rooms`)
 			.then(res => {
-				const persons = res.data;
-				this.setState({ persons });
+				const data = res.data;
+				this.setState({ data });
 			})
 	}
 
@@ -62,7 +62,7 @@ class FormInput extends Component {
 				title : "Your room name is" + " " +this.state.getRoomBycode,
 				html :"<b>Your code is</b>" + " "+ this.state.getCode,
 			})
-		}
+		} 
 		return (
 			<div className="container">
 				<div className="row">

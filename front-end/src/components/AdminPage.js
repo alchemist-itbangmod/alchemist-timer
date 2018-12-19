@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Button from '../core/ParallaxBtn';
+import socketIOClient from 'socket.io-client'
 
 const Bg = styled.div`
   max-height:100vh;
@@ -11,13 +11,16 @@ const Bg = styled.div`
 const Font = styled.h1`
   font-size:120px;
 `
+const socket = socketIOClient('http://localhost:9000')
+
 
 class Admin extends Component {
 
   state = {
     time: {},
-    seconds: 3600,
+    seconds: 5,
     timer: 0,
+    alert : null,
   }
 
   secondsToTime(secs) {
@@ -37,29 +40,32 @@ class Admin extends Component {
   componentDidMount() {
     let timeLeftVar = this.secondsToTime(this.state.seconds);
     this.setState({ time: timeLeftVar });
+    this.countDown()
   }
 
   startTimer = () => {
     if (this.state.timer === 0 && this.state.seconds > 0) {
-      this.state.timer = setInterval(this.countDown, 1000);
+      socket.emit('setTime', this.state.seconds)
     }
   }
 
   countDown = () => {
-    let seconds = this.state.seconds - 1;
-    this.setState({
-      time: this.secondsToTime(seconds),
-      seconds: seconds,
-    });
-
-    if (seconds === 0) {
-      clearInterval(this.state.timer);
-    }
+    // let seconds = this.state.seconds - 1
+    socket.on('time', () => {
+      setInterval(() => {
+        this.setState({
+          time: this.secondsToTime(this.state.seconds - 1),
+          seconds: this.state.seconds - 1,
+        })
+      }, 1000)
+    })
   }
 
-  stopTimer(){
-    clearInterval(this.state.timer);
+  stopTimer() {
   }
+
+ 
+
 
   render() {
     return (
@@ -67,6 +73,7 @@ class Admin extends Component {
         <div className="container d-flex justify-content-center ">
           <div className="row ">
             <div className="col-12">
+            <p time={this.seconds}>time  : {this.seconds}</p>
               <Font>h: {this.state.time.h} m: {this.state.time.m} s: {this.state.time.s}</Font>
             </div>
             <div className="col-12  d-flex justify-content-center ">

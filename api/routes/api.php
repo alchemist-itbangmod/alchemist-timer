@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Models\Room;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,11 +28,14 @@ Route::get('room/{id}','RoomController@getRoomById');
 //     ->header('Content-Type', 'text/plain');
 // });
 // Route::get('room/{room_name}','RoomController@createRoomCode');
-// Route::get('room/{room_code}','RoomController@getRoomByCode');
+Route::get('room/{room_code}','RoomController@getRoomByCode');
 // Route::post('room/{room_name}','RoomController@checkCode');
+Route::get('room?room_code={room_code}','RoomController@TestRoom');
 Route::post('room','RoomController@createRoom');
 Route::get('users', 'UserController@getUsers');
 Route::get('user/{id}', 'UserController@getUsersById');
 Route::get('user/test/{nickname}', 'UserController@getUserByNickname');
 Route::get('user', 'UserController@createUser');
-
+// Route::get('test', function(){
+//     return "<pre>" . print_r(I::all(), true) . "</pre>";
+// });

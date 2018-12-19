@@ -28,4 +28,5 @@ class RoomRepository implements RoomRepositoryInterface
 	public function createRoom($room){
 		return Room::create($room);
 	}
+
 }

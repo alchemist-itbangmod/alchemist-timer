@@ -13,16 +13,6 @@ const Input = styled.input`
 const Img = styled(ParallaxWrapper)`
 
 `
-
-async function getUser() {
-  try {
-    const response = await axios.get('/user?ID');
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 class FormInput extends Component {
 
   render() {
@@ -30,7 +20,7 @@ class FormInput extends Component {
 				<div>
 					<div className="col-12 d-flex justify-content-center">
 						<ParallaxWrapper parallaxScale={0.5}>
-							<img src="/img/Timer.png" />
+							<img src="/img/Timer.png"/>
 						</ParallaxWrapper>
 					</div>
 					<form>
