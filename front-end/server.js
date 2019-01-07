@@ -11,6 +11,10 @@ io.on('connection', function (socket) {
     console.log('client is subscribing to timer with interval ', time);
     io.sockets.emit('time', time);
   });
+  socket.on('addminstopTime', () => {
+    console.log('stop')
+    io.sockets.emit('stoptime')
+  })
 });
 
 

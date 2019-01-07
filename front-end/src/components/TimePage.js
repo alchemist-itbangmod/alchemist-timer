@@ -13,9 +13,11 @@ const Font = styled.h1`
 `
 const socket = socketIOClient('http://localhost:9000')
 
+let intervalTime;
+let intervalTime2;
 class Time extends Component {
-  
-   state = {
+
+  state = {
     time: {},
     seconds: 5,
     timer: 0,
@@ -43,28 +45,30 @@ class Time extends Component {
   }
 
   startTimer = () => {
-      socket.emit('setTime', this.state.timer)
+    socket.emit('setTime', this.state.timer)
   }
 
   countDown = () => {
     let seconds = this.state.seconds - 1
     socket.on('time', () => {
-      setInterval(() => {
+      intervalTime = setInterval(() => {
         this.setState({
           time: this.secondsToTime(this.state.seconds - 1),
           seconds: this.state.seconds - 1,
         })
+
+      }, 1000)
+      intervalTime2 = setInterval(() => {
+        socket.on('stoptime', () => {
+          this.stopTimer()
+        })
       }, 1000)
     })
-    if (this.state.time === 0) {
-      socket.on('time', () => {
-        clearInterval(this.state.time);
-      })
-    }
+
   }
 
   stopTimer() {
-    clearInterval(this.state.timer);
+    clearInterval(intervalTime);
   }
 
 

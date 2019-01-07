@@ -14,13 +14,16 @@ const Font = styled.h1`
 const socket = socketIOClient('http://localhost:9000')
 
 
+let interval;
+let interval2;
+
 class Admin extends Component {
 
   state = {
     time: {},
     seconds: 5,
     timer: 0,
-    alert : null,
+    alert: null,
   }
 
   secondsToTime(secs) {
@@ -52,19 +55,28 @@ class Admin extends Component {
   countDown = () => {
     // let seconds = this.state.seconds - 1
     socket.on('time', () => {
-      setInterval(() => {
+      interval = setInterval(() => {
         this.setState({
           time: this.secondsToTime(this.state.seconds - 1),
           seconds: this.state.seconds - 1,
         })
       }, 1000)
+      interval2 = setInterval(() => {
+        if (this.state.time.s === 0 && this.state.time.m === 0 && this.state.time.h === 0) {
+          socket.emit('addminstopTime')
+          this.stopTimer()
+        }
+      }, 1000)
+
     })
   }
 
   stopTimer() {
+    clearInterval(interval);
+    clearInterval(interval2);
   }
 
- 
+
 
 
   render() {
@@ -73,7 +85,7 @@ class Admin extends Component {
         <div className="container d-flex justify-content-center ">
           <div className="row ">
             <div className="col-12">
-            <p time={this.seconds}>time  : {this.seconds}</p>
+              <p time={this.seconds}>time  : {this.seconds}</p>
               <Font>h: {this.state.time.h} m: {this.state.time.m} s: {this.state.time.s}</Font>
             </div>
             <div className="col-12  d-flex justify-content-center ">
